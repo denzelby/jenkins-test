@@ -10,4 +10,9 @@ public class AppTest {
     public void test() {
         assertEquals(2, 2);
     }
+
+    @Test
+    public void testB() {
+        assertEquals(4, 4);
+    }
 }
