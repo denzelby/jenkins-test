@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  triggers {
+      pollSCM('0 * * ? * *')
+  }
   stages {
     stage('Debug pipeline') {
       parallel {
@@ -30,7 +33,6 @@ pipeline {
           junit '**/build/test-results/test/*.xml'
 
         }
-
       }
     }
     stage('Deploy') {
