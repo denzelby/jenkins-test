@@ -11,7 +11,7 @@ pipeline {
         stage('debug2') {
           steps {
             echo 'some message'
-            build 'Sport server'
+            build(job: 'Sport server/master', wait: true)
           }
         }
       }
