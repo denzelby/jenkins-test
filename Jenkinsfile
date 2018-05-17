@@ -2,17 +2,9 @@ pipeline {
     agent any
     stages {
         stage('Debug pipeline') {
-            parallel {
-                stage('Debug pipeline') {
-                    steps {
-                        sh 'printenv'
-                    }
-                }
-                stage('debug2') {
-                    steps {
-                        echo 'some message'
-                        build(job: 'Sport server/feature-ci', wait: true)
-                    }
+            stage('Debug pipeline') {
+                steps {
+                    sh 'printenv'
                 }
             }
         }
