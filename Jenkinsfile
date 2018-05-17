@@ -44,15 +44,15 @@ pipeline {
         failure {
             slackSend channel: 'ci-server',
                     color: 'bad',
-                    message: "Attention @here ${env.JOB_NAME} #${env.BUILD_NUMBER} has failed.."
+                    message: "Pipeline (<${env.BUILD_URL}|${currentBuild.fullDisplayName}>) failed! @everyone"
         }
         success {
             slackSend channel: 'ci-server',
                     color: 'good',
-                    message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
+                    message: "Pipeline (<${env.BUILD_URL}|${currentBuild.fullDisplayName}>) completed successfully."
         }
         always {
-            slackSend channel: 'ci-server', message: "debug:  cb=${currentBuild}\n env=${env}"
+            slackSend channel: 'ci-server', message: "debug:  cb=${currentBuild.dump()}\n env=${env.dump()}"
         }
     }
 }
