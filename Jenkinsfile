@@ -26,10 +26,10 @@ pipeline {
             when {
                 branch 'master'
             }
-            steps {
-                input 'Does the staging environment look ok?'
-                sh 'echo deploying!'
-            }
+//            steps {
+//                input 'Does the staging environment look ok?'
+//                sh 'echo deploying!'
+//            }
         }
         stage('Integration tests') {
             when {
@@ -38,21 +38,6 @@ pipeline {
             steps {
                 sh 'echo testing!'
             }
-        }
-    }
-    post {
-        failure {
-            slackSend channel: 'ci-server',
-                    color: 'bad',
-                    message: "Pipeline (<${env.BUILD_URL}|${currentBuild.fullDisplayName}>) failed! @everyone"
-        }
-        success {
-            slackSend channel: 'ci-server',
-                    color: 'good',
-                    message: "Pipeline (<${env.BUILD_URL}|${currentBuild.fullDisplayName}>) completed successfully."
-        }
-        always {
-            slackSend channel: 'ci-server', message: "debug:  cb=${currentBuild.dump()}\n env=${env.dump()}"
         }
     }
 }
