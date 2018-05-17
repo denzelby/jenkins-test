@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    triggers {
-        pollSCM('0 * * ? * *')
-    }
     stages {
         stage('Debug pipeline') {
             parallel {
