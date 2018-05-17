@@ -2,10 +2,8 @@ pipeline {
     agent any
     stages {
         stage('Debug pipeline') {
-            stage('Debug pipeline') {
-                steps {
-                    sh 'printenv'
-                }
+            steps {
+                sh 'printenv'
             }
         }
         stage('Build') {
