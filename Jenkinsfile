@@ -30,15 +30,6 @@ pipeline {
                 }
             }
         }
-        stage('Deploy') {
-            when {
-                branch 'master'
-            }
-//            steps {
-//                input 'Does the staging environment look ok?'
-//                sh 'echo deploying!'
-//            }
-        }
         stage('Integration tests') {
             when {
                 branch 'master'
