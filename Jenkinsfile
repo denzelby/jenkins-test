@@ -1,5 +1,13 @@
+def availableClusters = ['default', 'site', 'ems-private', 'ems-public']
+
 pipeline {
     agent any
+    parameters {
+        choice name: 'clusterName', description: 'test param', choices: availableClusters
+    }
+    environment {
+        CLUSTER_NAME = "${(clusterName != 'default') ? '-PclusterName='+clusterName : ''}"
+    }
     stages {
         stage('Debug pipeline') {
             steps {
@@ -8,7 +16,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh './gradlew clean build -x test'
+                sh './gradlew clean build -x test $CLUSTER_NAME'
             }
         }
         stage('Test') {
