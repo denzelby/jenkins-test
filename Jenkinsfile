@@ -6,7 +6,10 @@ pipeline {
         choice name: 'clusterName', description: 'test param', choices: availableClusters
     }
     environment {
-        CLUSTER_NAME = "${(params.clusterName != 'default') ? '-PclusterName=' + params.clusterName : ''}"
+        CLUSTER_NAME_PARAM = "${(params.clusterName != 'default') ? '-PclusterName=' + params.clusterName : ''}"
+        BUILD_NUMBER_PARAM = "-Pbuild_number=b${env.BUILD_NUMBER}"
+
+        GRADLE_PARAMS = "${env.CLUSTER_NAME_PARAM} ${env.BUILD_NUMBER_PARAM}"
     }
     stages {
         stage('Debug pipeline') {
@@ -16,7 +19,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh './gradlew clean build -x test $CLUSTER_NAME'
+                sh './gradlew clean build -x test $GRADLE_PARAMS'
             }
         }
         stage('Test') {
