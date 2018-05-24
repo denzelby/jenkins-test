@@ -1,4 +1,4 @@
-def availableClusters = ['default', 'site', 'ems-private', 'ems-public']
+def availableClusters = ['default', 'site', 'ems-private', 'ems-public'].join('\n')
 
 pipeline {
     agent any
