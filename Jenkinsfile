@@ -6,7 +6,7 @@ pipeline {
         choice name: 'clusterName', description: 'test param', choices: availableClusters
     }
     environment {
-        CLUSTER_NAME = "${(clusterName != 'default') ? '-PclusterName='+clusterName : ''}"
+        CLUSTER_NAME = "${(params.clusterName != 'default') ? '-PclusterName=' + params.clusterName : ''}"
     }
     stages {
         stage('Debug pipeline') {
